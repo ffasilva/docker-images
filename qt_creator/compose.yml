@@ -1,0 +1,15 @@
+# compose.yml
+services:
+  qt_creator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: qt_creator_container
+    environment:
+      DISPLAY: $DISPLAY # x server related
+    privileged: true # Needed for some gpu configurations.
+    volumes:
+          - /tmp/.X11-unix:/tmp/.X11-unix # x server related
+          - ~/.Xauthority:/root/.Xauthority # x server related
+    command: /bin/bash -c "
+      qtcreator"
